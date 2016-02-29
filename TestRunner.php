@@ -69,7 +69,12 @@ class TestRunner {
                 } else {
                     // unless explicitly defined we just take the first line of the profile as our label
                     if (!$label) {
-                        $label = trim($classLines[$startLine]);
+                        $code = array_slice($classLines,$startLine,$endLine-$startLine-1);
+                        array_walk($code,
+                            function (&$item) {
+                                $item = trim(preg_replace("/ /",'',$item, 8),"\n\r*");// code indent 8 spaces = 2 tabs
+                            });
+                        $label = implode(PHP_EOL, $code);
                     }
                     // output buffering is important for methods which would ordinarily write to it
                     ob_start();
