@@ -1,4 +1,3 @@
-#!/usr/bin/php 
 <?php
 
 include_once('IProfile.php');
@@ -11,6 +10,25 @@ class TestRunner {
     protected $mean = 0;
     protected $startTime = null;
     protected $endTime = null;
+    protected $classes = [];
+
+    public function includeProfilesAndSetClasses()
+    {
+        $classes = array();
+
+        foreach (glob("profiles/*.php") as $filename) {
+            include_once($filename);
+        }
+
+        foreach (get_declared_classes() as $strClass) {
+            $class = new ReflectionClass($strClass);
+            if ($class->implementsInterface('IProfile')) {
+                $classes[] = $strClass;
+            }
+        }
+
+        $this->setClasses($classes);
+    }
 
     public function setClasses($classes) {
         $this->classes = $classes;
@@ -240,20 +258,3 @@ class TestRunner {
         return $median;
     }
 }
-
-$classes = array();
-
-foreach (glob("profiles/*.php") as $filename) {
-    include_once($filename);
-}
-
-foreach (get_declared_classes() as $strClass) {
-    $class = new ReflectionClass($strClass);
-    if ($class->implementsInterface('IProfile')) {
-        $classes[] = $strClass;
-    }
-}
-
-$tr = new TestRunner();
-$tr->setClasses($classes);
-$tr->run();
