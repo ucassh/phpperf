@@ -3,6 +3,6 @@
   "type": "project",
   "description": "Fork of makeusabrew/phpperf",
   "autoload": {
-    "classmap ": [ "HtmlReporter.php", "IProfile.php", "TestRunner.php", "profiles/"]
+    "classmap": [ "HtmlReporter.php", "IProfile.php", "TestRunner.php", "profiles/"]
   }
 }
