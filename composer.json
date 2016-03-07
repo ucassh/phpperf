@@ -1,5 +1,8 @@
 {
   "name": "ucassh/phpperf",
   "type": "project",
-  "description": "Fork of makeusabrew/phpperf"
+  "description": "Fork of makeusabrew/phpperf",
+  "autoload": {
+    "classmap ": [ "HtmlReporter.php", "IProfile.php", "TestRunner.php", "profiles/"]
+  }
 }
