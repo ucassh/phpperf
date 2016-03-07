@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 class HtmlReporter {
     public function run() {
@@ -28,6 +27,3 @@ class HtmlReporter {
         return ob_get_clean();
     }
 }
-
-$reporter = new HtmlReporter();
-$reporter->run();
